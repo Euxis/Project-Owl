@@ -29,15 +29,15 @@ public class Movement : MonoBehaviour
     // Jump variables
     // Can the player jump?
     private bool isLanded = false;
-    // Can the player cancel the jump?
-    private bool completedJump = false;
-    // Has the player jumped? (As opposed to just falling)
-    private bool hasJumped = false;
+
+    private bool accelerateFall = false;
 
     private void FixedUpdate()
     {
         if (directionInt != 0) rb.linearVelocityX = directionInt * moveSpeed;
         rb.linearVelocityX = Mathf.Clamp(rb.linearVelocityX, -maxSpeed, maxSpeed);
+
+        if (accelerateFall) AccelerateFall();
     }
 
     private void Update()
@@ -78,20 +78,25 @@ public class Movement : MonoBehaviour
         {
             if (isLanded)
             {
-                hasJumped = true;
                 rb.AddForceY(jumpSpeed, ForceMode2D.Impulse); 
-
-                Debug.Log("Jumping");
-                
-                isLanded = false;
             }
         }
 
-        if (context.canceled && !completedJump && hasJumped)
+        // The player can adjust jump height by releasing the jump button early
+        // As long as vertical velocity is more than 0
+        if (context.performed && rb.linearVelocityY > 0)
         {
-            rb.linearVelocityY = 0;
-            completedJump = true;
+            accelerateFall = true;
         }
+    }
+
+    /// <summary>
+    /// Decreases vertical velocity until its zero
+    /// </summary>
+    private void AccelerateFall()
+    {
+        if (rb.linearVelocityY <= 0) accelerateFall = false;
+        rb.linearVelocityY -= 0.5f;
     }
 
     /// <summary>
@@ -101,14 +106,8 @@ public class Movement : MonoBehaviour
     {
         if (Physics2D.OverlapBox(rb.position + 0.75f * Vector2.down, new Vector2(0.95f, 0.75f), 0, LayerMask.GetMask("Floor")))
         {
-            Debug.Log("landed");
             isLanded = true;
-            completedJump = false;
-            hasJumped = false;
         }
         else isLanded = false;
-     
-
-        Debug.DrawLine(rb.position, rb.position + 0.75f * Vector2.down, Color.red);
     }
 }
