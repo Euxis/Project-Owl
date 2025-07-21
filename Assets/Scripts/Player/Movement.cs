@@ -14,6 +14,9 @@ public class Movement : MonoBehaviour
     [Tooltip("How much force is applied to the player when jumping")]
     [SerializeField] private float jumpSpeed;
     
+    [Tooltip("How much force is applied to the player when jumping with a parcel")]
+    [SerializeField] private float carryJumpSpeed;
+    
     [Tooltip("How much force is applied to the player when dodging")]
     [SerializeField] private float dodgeSpeed;
     
@@ -39,6 +42,7 @@ public class Movement : MonoBehaviour
     private int doubleJump;
     private bool dodging = false;
     public bool canAirDodge = false;
+    public bool isCarryingParcel = false;
     
     // Jump variables
     private bool isLanded = false;  // Can the player jump?
@@ -113,6 +117,7 @@ public class Movement : MonoBehaviour
                 if(doubleJump - 1 >= 0) doubleJump--;
                 rb.linearVelocityY = 0;     // Set Y velocity to 0 so the jump force being added isn't influenced
                                             // by previous jump
+                                            
                 rb.AddForceY(jumpSpeed, ForceMode2D.Impulse);
             }
         }
@@ -172,21 +177,19 @@ public class Movement : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks below player if they are grounded.
+    /// Checks below player if they are grounded. Restores double jump count if so.
     /// </summary>
     private void CheckLand()
     {
         if (Physics2D.OverlapBox(rb.position + 0.50f * Vector2.down, new Vector2(0.95f, 0.75f), 0, LayerMask.GetMask("Floor")))
         {
-            // Restore double jump uses
             doubleJump = maxDoubleJump;
-            
-            // If the player was previously midair, then landing will set their velocity to 0
             isLanded = true;
         }
         else
         {
-            // If the player was previously landed, then they can air dodge (i.e. they fell off a ledge without jumping)
+            // If the player was previously landed,
+            // then they can air dodge (i.e. they fell off a ledge without jumping)
             if(isLanded) canAirDodge = true;
             isLanded = false;
         }

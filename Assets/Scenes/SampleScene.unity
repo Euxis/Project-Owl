@@ -2694,6 +2694,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: objParcel (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2349763271764523284, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_EnableCollision
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349763271764523284, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -6.190014
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349763271764523284, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -7.513358
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021226804687787549, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_Mass
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2876,10 +2892,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702b278fd98d8144cb3915548e305f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parcel: {fileID: 0}
   carryingParcel: {fileID: 0}
   parcelList: []
-  parListIndex: 0
+  parcelIndex: 0
+  joint: {fileID: 0}
+  pointer: {fileID: 4171246761660736907, guid: 7b2b54a6ede35274483dfe6e05a0a5cc, type: 3}
 --- !u!1 &1828867711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,12 +2984,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 643681639171890449, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.1814
+      objectReference: {fileID: 0}
+    - target: {fileID: 643681639171890449, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.1
+      value: -7.25
       objectReference: {fileID: 0}
     - target: {fileID: 643681639171890449, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.21
+      value: -3.8
       objectReference: {fileID: 0}
     - target: {fileID: 643681639171890449, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3009,6 +3030,14 @@ PrefabInstance:
     - target: {fileID: 1449887012431267277, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
       propertyPath: m_Name
       value: objParcel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349763271764523284, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -6.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349763271764523284, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -6.21
       objectReference: {fileID: 0}
     - target: {fileID: 3003440382139417355, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
       propertyPath: objPlayer
@@ -3071,6 +3100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 50
   jumpSpeed: 2
+  carryJumpSpeed: 5
   dodgeSpeed: 3
   maxSpeed: 7.5
   groundDodgeLength: 0.15
@@ -3079,6 +3109,7 @@ MonoBehaviour:
   directionInt: 0
   lastNonZeroDirection: 1
   canAirDodge: 0
+  isCarryingParcel: 0
   timer: {fileID: 2128208129}
 --- !u!114 &2128208128
 MonoBehaviour:
@@ -3258,6 +3289,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: objParcel
       objectReference: {fileID: 0}
+    - target: {fileID: 2349763271764523284, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -4.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349763271764523284, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -7.21
+      objectReference: {fileID: 0}
     - target: {fileID: 3003440382139417355, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
       propertyPath: objPlayer
       value: 
@@ -3266,6 +3305,14 @@ PrefabInstance:
       propertyPath: movementScript
       value: 
       objectReference: {fileID: 2128208127}
+    - target: {fileID: 5021226804687787549, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_Mass
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021226804687787549, guid: 2efa13a6cc924314aa8bd5c78187576b, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

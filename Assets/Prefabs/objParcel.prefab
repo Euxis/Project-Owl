@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5021226804687787549}
   - component: {fileID: 1155273448485528263}
   - component: {fileID: 3003440382139417355}
+  - component: {fileID: 2349763271764523284}
   m_Layer: 7
   m_Name: objParcel
   m_TagString: Parcel
@@ -102,7 +103,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -178,3 +179,24 @@ MonoBehaviour:
   weight: 1
   objPlayer: {fileID: 0}
   movementScript: {fileID: 0}
+  joint: {fileID: 2349763271764523284}
+  pMatFrictionless: {fileID: 0}
+--- !u!255 &2349763271764523284
+FixedJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449887012431267277}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_DampingRatio: 0
+  m_Frequency: 0

@@ -48,17 +48,20 @@ public class InteractTrigger : MonoBehaviour
 
         if (collision.CompareTag("Parcel"))
         {
-            Debug.Log("Parcel entered");
             interactScript.parcelList.Add(collision.GetComponent<Parcel>());
+            interactScript.SpawnPointer(true);
         }
-
     }
 
+    // Will update conditions later for non-parcel interactables
     private void OnTriggerExit2D(Collider2D collision)
     {
         // Remove any null elements in the list
         if(interactScript.parcelList.Count > 0 && interactScript.parcelList[0] == null) interactScript.parcelList.RemoveAt(0);
+        
         interactScript.parcelList.Remove(collision.GetComponent<Parcel>());
         interactScript.UpdateListCount();
+        
+        if(interactScript.parcelList.Count <= 0) interactScript.SpawnPointer(false);
     }
 }
